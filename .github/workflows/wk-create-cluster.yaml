@@ -29,10 +29,12 @@ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Install eksctl
         run: |
-          curl --silent --location 
-"https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$(uname 
--s)_amd64.tar.gz" -o eksctl.tar.gz
-          tar -xzf eksctl.tar.gz -C /tmp
+          ARCH=amd64
+          PLATFORM=$(uname -s)_$ARCH
+          curl -sLO 
+"https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_${PLATFORM}.tar.gz"
+          tar -xzf eksctl_${PLATFORM}.tar.gz -C /tmp 
+&& rm eksctl_${PLATFORM}.tar.gz
           sudo mv /tmp/eksctl /usr/local/bin
 
       - name: Make script executable
@@ -40,5 +42,6 @@ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Execute script
         run: ./eksctl/create_cluster.sh
+
 
 
