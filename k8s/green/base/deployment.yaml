@@ -1,0 +1,11 @@
+containers:
+  - name: parrot-green
+    image: ghcr.io/bcarranza/parrot:green
+    ports:
+      - containerPort: 3000
+
+
+
+
+
+
